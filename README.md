@@ -77,3 +77,9 @@ python -m pytest
 ```
 
 The tests use local mock HTTP servers and do not contact Ufanet or open doors. GitHub Actions runs them on pushes and pull requests.
+
+## Release to PyPI
+
+Publishing is triggered when a GitHub Release is published. Before creating a release, set the `version` in `pyproject.toml` and the release tag to the same version (with or without a leading `v`, for example `0.1.0` or `v0.1.0`). The workflow checks that they match, runs tests, builds a wheel and source distribution, checks their metadata, and publishes them to PyPI.
+
+The first publish requires a one-time PyPI Trusted Publisher setup for project `ufanet-async`: owner `zerolink-m`, repository `ufanet-client-api`, workflow file `publish.yml`, and GitHub environment `pypi`. PyPI can create the project on its first trusted publish. No PyPI API token needs to be stored in GitHub. See the [PyPI Trusted Publishing setup guide](https://docs.pypi.org/trusted-publishers/creating-a-project-through-oidc/).
